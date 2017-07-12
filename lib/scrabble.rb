@@ -1,7 +1,20 @@
 class Scrabble
+  attr_reader :score, :word
+
+  def initialize(word)
+    @word = word
+    # @score = score
+  end
 
   def score(word)
-    1
+    letters = word.chars
+    total = 0
+    # point_values.each { |key, value| }
+    letters.each do |letter|
+      if letter == point_values[0]
+        puts point_values[0][key]
+      end
+    end
   end
 
   def point_values
@@ -15,4 +28,5 @@ class Scrabble
       "Y"=>4, "Z"=>10
     }
   end
+
 end
