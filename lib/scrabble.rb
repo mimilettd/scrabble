@@ -1,9 +1,4 @@
 class Scrabble
-  attr_reader :score, :word
-
-  def initialize
-    @word = word
-  end
 
   def score(word)
     if word.nil? || word == ""

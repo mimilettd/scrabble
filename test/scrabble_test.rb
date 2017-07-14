@@ -24,18 +24,3 @@ class ScrabbleTest < Minitest::Test
     assert_equal 58, Scrabble.new.score_with_multipliers('sparkle', [1,2,1,3,1,2,1], 2)
   end
 end
-
-# > game = Scrabble.new
-# => ...
-# > game.score("hello")
-# => 8
-# > game.score("")
-# => 0
-# > game.score(nil)
-# => 0
-# > game.score_with_multipliers('hello', [1,2,1,1,1])
-# => 9
-# > game.score_with_multipliers('hello', [1,2,1,1,1], 2)
-# => 18
-# > game.score_with_multipliers('sparkle', [1,2,1,3,1,2,1], 2)
-# => 58
