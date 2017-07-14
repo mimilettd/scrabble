@@ -1,20 +1,48 @@
 class Scrabble
   attr_reader :score, :word
 
-  def initialize(word)
+  def initialize
     @word = word
-    # @score = score
   end
 
   def score(word)
-    letters = word.chars
-    total = 0
-    # point_values.each { |key, value| }
-    letters.each do |letter|
-      if letter == point_values[0]
-        puts point_values[0][key]
+    if word.nil? || word == ""
+      return 0
+    else
+      value = word.upcase.chars.map do |letter|
+      point_values[letter]
       end
+      value.inject(&:+)
     end
+  end
+
+  def score_with_multipliers(word, multiplier, doubler = 1)
+    if word.length < 6
+      score_with_multipliers_no_bonus(word, multiplier, doubler)
+    else
+      score_with_multipliers_and_bonus(word, multiplier, doubler)
+    end
+  end
+
+  def score_with_multipliers_no_bonus(word, multiplier, doubler = 1)
+    value = word.upcase.chars.map do |letter|
+      point_values[letter]
+    end
+    new_value = value.zip(multiplier).map do |value, multiplier|
+      (value * multiplier) * doubler
+    end
+    new_value.inject(&:+)
+  end
+
+  def score_with_multipliers_and_bonus(word, multiplier, doubler = 1)
+    value = word.upcase.chars.map do |letter|
+      point_values[letter]
+    end
+    new_value = value.zip(multiplier).map do |value, multiplier|
+      (value * multiplier) * doubler
+    end
+    sum = new_value.inject(&:+)
+    sum + (10 * doubler)
   end
 
   def point_values
