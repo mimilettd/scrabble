@@ -1,43 +1,13 @@
 class Scrabble
-
   def score(word)
-    if word.nil? || word == ""
-      return 0
-    else
-      value = word.upcase.chars.map do |letter|
-      point_values[letter]
+    if word != nil
+      letters = word.upcase.chars
+      letters.inject(0) do |sum, letter|
+        sum + point_values[letter]
       end
-      value.inject(&:+)
-    end
-  end
-
-  def score_with_multipliers(word, multiplier, doubler = 1)
-    if word.length < 6
-      score_with_multipliers_no_bonus(word, multiplier, doubler)
     else
-      score_with_multipliers_and_bonus(word, multiplier, doubler)
+      0
     end
-  end
-
-  def score_with_multipliers_no_bonus(word, multiplier, doubler = 1)
-    value = word.upcase.chars.map do |letter|
-      point_values[letter]
-    end
-    new_value = value.zip(multiplier).map do |value, multiplier|
-      (value * multiplier) * doubler
-    end
-    new_value.inject(&:+)
-  end
-
-  def score_with_multipliers_and_bonus(word, multiplier, doubler = 1)
-    value = word.upcase.chars.map do |letter|
-      point_values[letter]
-    end
-    new_value = value.zip(multiplier).map do |value, multiplier|
-      (value * multiplier) * doubler
-    end
-    sum = new_value.inject(&:+)
-    sum + (10 * doubler)
   end
 
   def point_values
